@@ -1,8 +1,11 @@
 #include<stdio.h>
+#include<math.h>
 
 float f(float x)
 {
-    return (x*x*x)-(5*x)+(1);
+    // return (x*x*x)-(5*x)+(1);
+    // return log(x) - cos(x);
+    return 3*x - (pow(1+sin(x), 1/2));
     // return (x*x*x)-(x)-1;
 }
 
@@ -24,7 +27,9 @@ int main()
     {
         x = (x0+x1)/2;
         value = f(x);
+        printf("\nf(x0) = %f and f(x1) = %f", f(x0), f(x1));
         printf("\nFor range %f - %f the value is %f and the f(x) is :", x0, x1, x);
+        printf("%f", value);
         if(value>0)
         {
             x1 = x;
@@ -35,7 +40,6 @@ int main()
         }
         if(value<0)
             value = -value;
-        printf("%f", value);
     } while (value>allowedError);
     
     printf("\nThe value of x is:%f", x);
