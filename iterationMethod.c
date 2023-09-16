@@ -3,12 +3,13 @@
 
 float f(float x)
 {
-    return atan(1/(pow(2.71828,x)));
+    // return sqrt((sin(x)*sin(x))+1);
+    return sqrt((((x+1)*(x+1))+sin(x))/sin(x));
 }
 float df(float x)
 {
     // return -2/sin(2*x);
-    return sin(2*x)/2*(pow((sin(x)*sin(x))-1, (1/2)));
+    // return sin(2*x)/2*(pow((sin(x)*sin(x))-1, (1/2)));
 }
 
 int main()

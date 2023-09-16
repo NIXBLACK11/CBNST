@@ -5,6 +5,7 @@ float f(float x)
 {
     // return (x*x*x)-(5*x)+(1);
     // return (x*sin(x))+cos(x);
+    // return (x*tan(x))+1;
     return (x*tan(x))+1;
     // return (x*x*x)-(x)-1;
 }
@@ -13,7 +14,8 @@ float df(float x)
 {
     // return (3*x*x)-(5);
     // return x*cos(x);
-    return (x*(1+tan(x)));
+    // return (x*(1+tan(x)));
+    return (x/(cos(x)*cos(x)))+tan(x);
 }
 
 int main()
