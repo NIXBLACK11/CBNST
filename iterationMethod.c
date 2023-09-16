@@ -3,11 +3,26 @@
 
 float f(float x)
 {
-    return log(cot(x));
+    return atan(1/(pow(2.71828,x)));
+}
+float df(float x)
+{
+    // return -2/sin(2*x);
+    return sin(2*x)/2*(pow((sin(x)*sin(x))-1, (1/2)));
 }
 
 int main()
 {
+    for (int i = 1; i < 100; i++)
+    {
+        printf("%d, ", i);
+        if(fabs(df(i))<1)
+        {
+            printf("\nPossible at : %d", i);
+            break;
+        }
+    }
+    
     float x, allowedError;
     printf("Enter the allowed error: ");
     scanf("%f", &allowedError);
