@@ -50,14 +50,14 @@ int main() {
         }
     }
 
-    printf("Original Matrix:\n");
-    printMatrix(matrix, n);
+    // printf("Original Matrix:\n");
+    // printMatrix(matrix, n);
 
     // Perform Gauss-Jordan elimination
     gaussJordan(matrix, n);
 
-    printf("Reduced Row Echelon Form:\n");
-    printMatrix(matrix, n);
+    // printf("Reduced Row Echelon Form:\n");
+    // printMatrix(matrix, n);
 
     printf("Solutions:\n");
     for (int i = 0; i < n; i++) {
