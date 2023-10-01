@@ -1,66 +1,70 @@
-#include <stdio.h>
-#include <math.h>
 
-#define MAX_ITER 100
-#define EPSILON 1e-6
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
 
-int main() {
-    int n;
-    printf("Enter the number of equations: ");
-    scanf("%d", &n);
+/* Arrange systems of linear
+   equations to be solved in
+   diagonally dominant form
+   and form equation for each
+   unknown and define here
+*/
+/* In this example we are solving
+   3x + 20y - z = -18
+   2x - 3y + 20z = 25
+   20x + y - 2z = 17
+*/
+/* Arranging given system of linear
+   equations in diagonally dominant
+   form:
+   20x + y - 2z = 17
+   3x + 20y -z = -18
+   2x - 3y + 20z = 25
+*/
+/* Equations:
+   x = (17-y+2z)/20
+   y = (-18-3x+z)/20
+   z = (25-2x+3y)/20
+*/
+/* Defining function */
+#define f1(x,y,z)  (17-y+2*z)/20
+#define f2(x,y,z)  (-18-3*x+z)/20
+#define f3(x,y,z)  (25-2*x+3*y)/20
 
-    double A[n][n];
-    double b[n];
+/* Main function */
+int main()
+{
+ float x0=0, y0=0, z0=0, x1, y1, z1, e1, e2, e3, e;
+ int count=1;
+ clrscr();
+ printf("Enter tolerable error:\n");
+ scanf("%f", &e);
 
-    printf("Enter the coefficients of the equations:\n");
-    for (int i = 0; i < n; i++) {
-        printf("Equation %d coefficients (space-separated): ", i + 1);
-        for (int j = 0; j < n; j++) {
-            scanf("%lf", &A[i][j]);
-        }
-        printf("Enter the constant term (b%d): ", i + 1);
-        scanf("%lf", &b[i]);
-    }
+ printf("\nCount\tx\ty\tz\n");
+ do
+ {
+  /* Calculation */
+  x1 = f1(x0,y0,z0);
+  y1 = f2(x1,y0,z0);
+  z1 = f3(x1,y1,z0);
+  printf("%d\t%0.4f\t%0.4f\t%0.4f\n",count, x1,y1,z1);
 
-    double x[n]; // Initialize solution vector
-    for (int i = 0; i < n; i++) {
-        x[i] = 0.0; // You can initialize with other values as well
-    }
+  /* Error */
+  e1 = fabs(x0-x1);
+  e2 = fabs(y0-y1);
+  e3 = fabs(z0-z1);
 
-    int iter = 0;
-    double maxDiff;
+  count++;
 
-    do {
-        maxDiff = 0.0;
-        for (int i = 0; i < n; i++) {
-            double oldX = x[i];
-            double sum = 0.0;
-            for (int j = 0; j < n; j++) {
-                if (j != i) {
-                    sum += A[i][j] * x[j];
-                }
-            }
-            x[i] = (b[i] - sum) / A[i][i];
-            double diff = fabs(x[i] - oldX);
-            if (diff > maxDiff) {
-                maxDiff = diff;
-            }
-        }
+  /* Set value for next iteration */
+  x0 = x1;
+  y0 = y1;
+  z0 = z1;
 
-        iter++;
+ }while(e1>e && e2>e && e3>e);
 
-        printf("Iteration %d: ", iter);
-        for (int i = 0; i < n; i++) {
-            printf("x%d = %.6lf ", i + 1, x[i]);
-        }
-        printf("\n");
+ printf("\nSolution: x=%0.3f, y=%0.3f and z = %0.3f\n",x1,y1,z1);
 
-    } while (maxDiff > EPSILON && iter < MAX_ITER);
-
-    printf("Solution after %d iterations:\n", iter);
-    for (int i = 0; i < n; i++) {
-        printf("x%d = %.6lf\n", i + 1, x[i]);
-    }
-
-    return 0;
+ getch();
+ return 0;
 }

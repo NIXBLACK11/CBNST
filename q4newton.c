@@ -44,7 +44,7 @@ int main()
         temp = x;
         printf("\nFor the value is %f and the f(x) is :%f", x, value);
         x = value;
-    } while (fabs(value-temp)>allowedError);
+    } while (fabs(f(x))>allowedError);
     
     printf("\nThe value of x is:%f", x);
     printf("\nThe f(x) is :%f", f(x));
