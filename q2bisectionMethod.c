@@ -5,7 +5,7 @@ float f(float x)
 {
     // return (x*x*x)-(5*x)+(1);
     // return log(x) - cos(x);
-    return 3*x - (pow(1+sin(x), 1/2));
+    return pow(x, 3) - 7*pow(x, 2) - 14*x - 6;
     // return (x*x*x)-(x)-1;
 }
 
